@@ -1,0 +1,13 @@
+<mat-toolbar>
+  <span> {{ "APP_TITLE" | translate }}</span>
+  <span class="spacer"></span>
+  <button
+    mat-mini-fab
+    color="warn"
+    (click)="logOut()"
+    matTooltip="Log Out"
+    aria-label="icon-button with exit icon"
+  >
+    <mat-icon>exit_to_app</mat-icon>
+  </button>
+</mat-toolbar>

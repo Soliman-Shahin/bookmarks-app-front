@@ -1,0 +1,43 @@
+<div class="container-fluid">
+  <div class="row justify-content-center">
+    <div class="col-md-6 py-5">
+      <form [formGroup]="bookmarkForm">
+        <mat-form-field>
+          <mat-label>{{ "BOOKMARK.title" | translate }}</mat-label>
+          <input type="text" formControlName="title" matInput />
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>{{ "BOOKMARK.url" | translate }}</mat-label>
+          <input type="text" formControlName="url" matInput />
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>{{ "BOOKMARK.description" | translate }}</mat-label>
+          <textarea formControlName="description" matInput></textarea>
+        </mat-form-field>
+
+        <div class="d-flex justify-content-between">
+          <button
+            mat-raised-button
+            color="primary"
+            (click)="submit()"
+            [disabled]="bookmarkForm.invalid"
+          >
+            <mat-icon>save</mat-icon>
+            {{ "BOOKMARK.submit" | translate }}
+          </button>
+
+          <button
+            mat-raised-button
+            color="warn"
+            (click)="resetForm()"
+          >
+            <mat-icon>refresh</mat-icon>
+            {{ "BOOKMARK.reset" | translate }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

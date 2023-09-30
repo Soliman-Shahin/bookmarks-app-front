@@ -1,0 +1,59 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.open_close_sidebar {
+  position: fixed;
+  left: 170px;
+  top: 50%;
+  z-index: 999;
+  width: 20px;
+  background: #2196f3;
+  height: 70px;
+  overflow: hidden;
+  cursor: pointer;
+  color: #fff;
+  transition: all 0.3s ease-out;
+  border-radius: 0 15px 15px 0;
+}
+
+.btnActive {
+  left: 0px;
+  transform: rotate(180deg);
+  border-radius: 15px 0 0 15px;
+}
+
+mat-icon {
+  margin-top: 24px;
+  margin-left: 4px;
+}
+
+.cs-container {
+  padding: 1rem;
+  flex: 1;
+}
+
+mat-drawer {
+  width: 170px;
+}
+
+mat-drawer-container {
+  height: 100%;
+}
+
+mat-drawer-content {
+  display: flex;
+  flex-direction: column;
+}
+
+@media print {
+  :host {
+    display: block;
+    height: auto;
+  }
+  app-footer {
+    display: none;
+  }
+}

@@ -1,0 +1,26 @@
+<mat-list class="sidebar">
+  <div class="user">
+    <button
+      mat-mini-fab
+      color="primary"
+      aria-label="icon-button with person icon"
+    >
+      <mat-icon mat-list-icon>person_outline</mat-icon></button
+    ><span class="user-name">{{ username }}</span>
+  </div>
+  <div class="menu">
+    <a
+      *ngFor="let item of menuItems"
+      class="nav-link"
+      mat-list-item
+      matRipple
+      [routerLink]="item?.link"
+      routerLinkActive="active"
+    >
+      <mat-icon mat-list-icon>{{ item?.icon }}</mat-icon>
+      <span class="link-title">{{
+        "SIDE_MENU." + item?.title | translate
+      }}</span>
+    </a>
+  </div>
+</mat-list>

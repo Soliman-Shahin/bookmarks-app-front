@@ -1,0 +1,33 @@
+.bookmark-stream-card {
+  padding: 0.5rem 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #3f3c3c;
+  border-radius: 10px;
+  box-shadow: rgba(111, 133, 153, 0.48) 6px 2px 16px 0px,
+    rgba(110, 110, 110, 0.8) -6px -2px 16px 0px;
+  .word-wrap {
+    word-wrap: break-word;
+  }
+}
+
+.bookmark-module-card {
+  padding: 1rem;
+  cursor: pointer;
+  .bookmark-icon {
+    font-size: 60px;
+    width: 60%;
+    height: 40%;
+  }
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  background-color: #3f3c3c;
+  border-radius: 15px;
+  box-shadow: rgba(111, 133, 153, 0.48) 6px 2px 16px 0px,
+    rgba(110, 110, 110, 0.8) -6px -2px 16px 0px;
+  .word-wrap {
+    word-wrap: break-word;
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "APP_TITLE": "Bookmark App",
+  "DIR": "ltr",
+  "LANG": "en",
+  "ONLINE": "You Are Online",
+  "OFFLINE": "You Are Offline",
+  "NO_DATA": "No Data",
+  "SIDE_MENU": {
+    "BOOKMARKS": "Bookmarks",
+    "ABOUT": "About"
+  },
+  "BOOKMARK": {
+    "title": "Title",
+    "url": "URL",
+    "description": "Description",
+    "submit": "Submit",
+    "reset": "Reset",
+    "added": "Bookmark added successfully",
+    "edit": "Edit",
+    "open": "Open",
+    "remove": "Remove",
+    "import": "Import file",
+    "updated": "Bookmark updated successfully",
+    "removed": "Bookmark removed successfully",
+    "imported": "Bookmarks imported successfully"
+  },
+  "DEV": {
+    "DEVELOPER": "Soliman Shahin",
+    "GITHUB": "https://github.com/Soliman-Shahin"
+  }
+}

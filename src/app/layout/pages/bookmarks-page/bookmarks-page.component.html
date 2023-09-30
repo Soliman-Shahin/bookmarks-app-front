@@ -1,0 +1,69 @@
+<div class="container-fluid">
+  <div class="row d-flex justify-content-between">
+    <div class="col-auto"><h1>All Bookmarks</h1></div>
+    <div class="col-auto">
+      <button (click)="changeView()" mat-icon-button color="info">
+        <mat-icon>{{ view_module ? "view_module" : "view_stream" }} </mat-icon>
+      </button>
+      <button mat-icon-button color="info" [matMenuTriggerFor]="menu">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="addBookmark()">
+          <mat-icon>add</mat-icon>
+          <span>Add New Bookmark</span>
+        </button>
+        <button mat-menu-item (click)="importBookmarks()">
+          <mat-icon>important_devices</mat-icon>
+          <span>Import Bookmarks</span>
+        </button>
+        <button mat-menu-item (click)="exportBookmarks()">
+          <mat-icon> import_export</mat-icon>
+          <span>Export Bookmarks</span>
+        </button>
+      </mat-menu>
+    </div>
+  </div>
+
+  <ng-container *ngIf="loading; else viewData"
+    ><app-loading-spinner></app-loading-spinner
+  ></ng-container>
+</div>
+
+<ng-template #viewData>
+  <div class="row" *ngIf="bookmarks_list.length; else noData">
+    <div
+      *ngFor="let bookmark of bookmarks_list"
+      [ngClass]="
+        view_module
+          ? 'col-xl-2 col-lg-2 col-md-4 col-sm-6 col-xs-12 my-2'
+          : 'col-xl-4 col-lg-4 col-md-6 col-sm-12 col-xs-12 my-2'
+      "
+    >
+      <app-bookmark-card
+        [bookmark]="bookmark"
+        [view]="view_module"
+        (refreshBookmark)="refreshBookmark()"
+      ></app-bookmark-card>
+    </div>
+  </div>
+  <div class="row">
+    <mat-paginator
+      *ngIf="bookmarks_list.length"
+      (page)="handlePageEvent($event)"
+      [length]="totalItems"
+      [pageSize]="pageSize"
+      [disabled]="disabled"
+      [showFirstLastButtons]="showFirstLastButtons"
+      [pageSizeOptions]="showPageSizeOptions ? pageSizeOptions : []"
+      [hidePageSize]="hidePageSize"
+      [pageIndex]="page"
+      aria-label="Select page"
+    >
+    </mat-paginator>
+  </div>
+</ng-template>
+
+<ng-template #noData>
+  <app-no-data></app-no-data>
+</ng-template>

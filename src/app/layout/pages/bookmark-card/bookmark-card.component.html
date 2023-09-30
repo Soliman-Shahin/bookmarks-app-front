@@ -1,0 +1,65 @@
+<div [ngClass]="view ? 'bookmark-module-card' : 'bookmark-stream-card'">
+  <ng-container>
+    <div class="col-auto">
+      <img
+        *ngIf="bookmark.image"
+        [src]="bookmark.image"
+        width="35"
+        height="35"
+        alt="bookmark_icon"
+      />
+      <mat-icon *ngIf="!bookmark.image" class="bookmark-icon"
+        >star_border</mat-icon
+      >
+    </div>
+    <div class="col-auto">
+      <h3>{{ bookmark.title }}</h3>
+    </div>
+    <div class="col-auto">
+      <h4 class="word-wrap">{{ bookmark.url }}</h4>
+    </div>
+    <div *ngIf="!view" class="col-auto">
+      <button mat-icon-button color="info" [matMenuTriggerFor]="menu">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+    </div>
+    <div *ngIf="view" class="col-auto">
+      <button
+        mat-icon-button
+        [matTooltip]="'BOOKMARK.open' | translate"
+        (click)="goToExternalWebsite(bookmark)"
+      >
+        <mat-icon>link</mat-icon>
+      </button>
+      <button
+        mat-icon-button
+        [matTooltip]="'BOOKMARK.edit' | translate"
+        (click)="updateBookmark(bookmark)"
+      >
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button
+        mat-icon-button
+        [matTooltip]="'BOOKMARK.remove' | translate"
+        (click)="removeBookmark(bookmark?._id)"
+      >
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+  </ng-container>
+</div>
+
+<mat-menu #menu="matMenu">
+  <button mat-menu-item (click)="goToExternalWebsite(bookmark)">
+    <mat-icon>link</mat-icon>
+    <span>{{ "BOOKMARK.open" | translate }}</span>
+  </button>
+  <button mat-menu-item (click)="updateBookmark(bookmark)">
+    <mat-icon>edit</mat-icon>
+    <span>{{ "BOOKMARK.edit" | translate }}</span>
+  </button>
+  <button mat-menu-item (click)="removeBookmark(bookmark?._id)">
+    <mat-icon>delete</mat-icon>
+    <span>{{ "BOOKMARK.remove" | translate }}</span>
+  </button>
+</mat-menu>

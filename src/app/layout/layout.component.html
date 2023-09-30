@@ -1,0 +1,24 @@
+<mat-drawer-container [dir]="direction" class="layout-container">
+  <mat-drawer
+    #navbar
+    mode="side"
+    [opened]="menuOpen == 'yes'"
+    disableClosed="true"
+  >
+    <app-side-menu [username]="username"></app-side-menu>
+  </mat-drawer>
+  <mat-drawer-content class="content">
+    <app-header></app-header>
+    <div class="cs-container">
+      <div
+        class="open_close_sidebar"
+        (click)="toggleExpandMenu()"
+        [ngClass]="{ btnActive: !isOpen }"
+      >
+        <mat-icon>arrow_back_ios</mat-icon>
+      </div>
+      <router-outlet></router-outlet>
+    </div>
+    <app-footer> </app-footer>
+  </mat-drawer-content>
+</mat-drawer-container>

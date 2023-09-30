@@ -1,0 +1,37 @@
+<div class="container">
+  <div class="screen">
+    <div class="screen__content">
+      <form class="signup" [formGroup]="signupForm">
+        <h2 class="auth-title">Sign Up Now</h2>
+        <div class="signup__field">
+          <i class="signup__icon fas fa-user"></i>
+          <input type="text" class="signup__input" formControlName="email" placeholder="Email" />
+        </div>
+        <div class="signup__field">
+          <i class="signup__icon fas fa-lock"></i>
+          <input type="password" class="signup__input" formControlName="password" placeholder="Password" />
+          <button
+          (click)="hide = !hide"
+          [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hide"
+        >
+        <i class="signup__icon fa-regular" ngClass="{{ !hide ? 'fa-eye' : 'fa-eye-slash' }}"></i>
+        </button>
+        </div>
+        <button (click)="signup(signupForm.value)" class="button signup__submit" [disabled]="signupForm.invalid">
+          <span class="button__text">Sign Up</span>
+          <i class="button__icon fas fa-chevron-right"></i>
+        </button>
+      </form>
+      <div class="social-signup">
+        <h3><a routerLink="/auth/login"> Login </a></h3>
+      </div>
+    </div>
+    <div class="screen__background">
+      <span class="screen__background__shape screen__background__shape4"></span>
+      <span class="screen__background__shape screen__background__shape3"></span>
+      <span class="screen__background__shape screen__background__shape2"></span>
+      <span class="screen__background__shape screen__background__shape1"></span>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,37 @@
+mat-list {
+  padding: 0;
+  background: #000811;
+  height: 100%;
+  .user,
+  .menu {
+    margin-inline-start: 1rem;
+    color: white;
+    &.user {
+      padding: 1rem;
+      margin-bottom: 3rem;
+      .user-name {
+        margin-inline-start: 0.5rem;
+        font-weight: 600;
+      }
+    }
+    &.menu {
+      .nav-link {
+        height: 45px;
+        mat-icon {
+          color: white;
+        }
+        .link-title {
+          margin-inline-start: 0.5rem;
+          vertical-align: text-bottom;
+          color: white;
+        }
+      }
+      .active {
+        background: #006ce0;
+        border-radius: 6px 0 0 6px;
+        transition: #000811 0.5s linear;
+        box-shadow: rgba(20, 114, 238, 0.918) 0px 2px 10px 0px;
+      }
+    }
+  }
+}
