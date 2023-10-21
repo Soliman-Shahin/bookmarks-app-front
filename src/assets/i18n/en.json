@@ -22,7 +22,8 @@
     "import": "Import file",
     "updated": "Bookmark updated successfully",
     "removed": "Bookmark removed successfully",
-    "imported": "Bookmarks imported successfully"
+    "imported": "Bookmarks imported successfully",
+    "tags": "Tags"
   },
   "DEV": {
     "DEVELOPER": "Soliman Shahin",

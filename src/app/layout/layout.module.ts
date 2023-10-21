@@ -14,6 +14,7 @@ import { LoadingSpinnerComponent } from './components/loading-spinner/loading-sp
 import { AddEditBookmarkComponent } from './pages/add-edit-bookmark/add-edit-bookmark.component';
 import { ImportBookmarksComponent } from './pages/import-bookmarks/import-bookmarks.component';
 import { SharedModule } from '../shared/shared.module';
+import { AutoCompleteSelectChipsComponent } from './components/auto-complete-select-chips/auto-complete-select-chips.component';
 
 @NgModule({
   imports: [
@@ -34,6 +35,7 @@ import { SharedModule } from '../shared/shared.module';
     LoadingSpinnerComponent,
     AddEditBookmarkComponent,
     ImportBookmarksComponent,
+    AutoCompleteSelectChipsComponent,
   ],
 })
 export class LayoutModule {}

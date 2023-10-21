@@ -22,6 +22,21 @@ export interface BookmarkModel {
   };
 }
 
+export interface Tag {
+  title: string;
+  _id?: string;
+}
+
+export interface TagModel {
+  data: {
+    _id?: string;
+    title: string;
+  };
+  options: {
+    totalCount: number;
+  };
+}
+
 export interface RequestOptions {
   headers: HttpHeaders;
   params: HttpParams;
