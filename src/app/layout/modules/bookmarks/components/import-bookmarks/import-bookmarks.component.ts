@@ -1,29 +1,29 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, inject } from '@angular/core';
 import { BookmarksService } from '../../services/bookmarks.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { TranslateService } from '@ngx-translate/core';
-import { HttpClient } from '@angular/common/http';
 import { Bookmark } from '../../models';
 // Import the htmlparser2 library
 import { Parser } from 'htmlparser2';
+import { BaseComponent } from 'src/app/shared/base';
 
 @Component({
   selector: 'app-import-bookmarks',
   templateUrl: './import-bookmarks.component.html',
   styleUrls: ['./import-bookmarks.component.scss'],
 })
-export class ImportBookmarksComponent implements OnInit {
+export class ImportBookmarksComponent extends BaseComponent implements OnInit {
   file: any;
   uploadProgress: number = 0;
+
+  bookmarksService = inject(BookmarksService);
+
   constructor(
-    private _snackBar: MatSnackBar,
-    private http: HttpClient,
-    private bookmarksService: BookmarksService,
-    public translate: TranslateService,
     public dialogRef: MatDialogRef<ImportBookmarksComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
-  ) {}
+  ) {
+    super();
+  }
 
   ngOnInit() {}
 
@@ -67,7 +67,7 @@ export class ImportBookmarksComponent implements OnInit {
         this.openSnackBar(
           'success',
           res?.ok,
-          this.translate.instant('BOOKMARK.imported')
+          this.translateService.instant('BOOKMARK.imported')
         );
         this.dialogRef.close(true);
       },
@@ -145,9 +145,5 @@ export class ImportBookmarksComponent implements OnInit {
 
     // Write the JSON string to a file or other destinations
     console.log(this.file); // For demonstration purpose only
-  }
-
-  openSnackBar(type: any, status: any, message: any) {
-    this._snackBar.open(status, message, { panelClass: type });
   }
 }

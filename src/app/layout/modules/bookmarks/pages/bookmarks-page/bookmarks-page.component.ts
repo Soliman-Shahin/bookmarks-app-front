@@ -1,27 +1,31 @@
-import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { BookmarksService } from './../../services/bookmarks.service';
-import { AddEditBookmarkComponent } from '../add-edit-bookmark/add-edit-bookmark.component';
-import { ImportBookmarksComponent } from '../import-bookmarks/import-bookmarks.component';
-import { FileSaverService } from 'ngx-filesaver';
+import { Component, OnInit, inject } from '@angular/core';
+import { AddEditBookmarkComponent } from '../../components/add-edit-bookmark/add-edit-bookmark.component';
+import { ImportBookmarksComponent } from '../../components/import-bookmarks/import-bookmarks.component';
 import { BookmarkModel } from '../../models';
 import { PageEvent } from '@angular/material/paginator';
+import { BookmarksService } from '../../services';
+import { BaseComponent } from 'src/app/shared/base';
 
 @Component({
   selector: 'app-bookmarks-page',
   templateUrl: './bookmarks-page.component.html',
   styleUrls: ['./bookmarks-page.component.scss'],
 })
-export class BookmarksPageComponent implements OnInit {
+export class BookmarksPageComponent extends BaseComponent implements OnInit {
+  bookmarksService = inject(BookmarksService);
   bookmarks_list: any = [];
   view_module = false;
   loading = true;
 
+  // init default params
+  protected defaultParams = {
+    pageSize: 10,
+    page: 0,
+    sort: 'ASC',
+  };
+
   totalItems = 0;
-  pageSize = 10;
-  page = 0;
   pageSizeOptions = [5, 10, 25];
-  sort = 'ASC';
 
   hidePageSize = false;
   showPageSizeOptions = true;
@@ -30,11 +34,9 @@ export class BookmarksPageComponent implements OnInit {
 
   pageEvent!: PageEvent;
 
-  constructor(
-    private bookmarksService: BookmarksService,
-    public dialog: MatDialog,
-    private fileSaverService: FileSaverService
-  ) {}
+  constructor() {
+    super();
+  }
 
   ngOnInit() {
     this.getAllBookmarks();
@@ -43,21 +45,16 @@ export class BookmarksPageComponent implements OnInit {
   handlePageEvent(e: PageEvent) {
     this.pageEvent = e;
     this.totalItems = e.length;
-    this.pageSize = e.pageSize;
-    this.page = e.pageIndex;
+    this.defaultParams.pageSize = e.pageSize;
+    this.defaultParams.page = e.pageIndex;
     this.getAllBookmarks();
   }
 
   async getAllBookmarks() {
     this.loading = true;
     try {
-      const queryParams = {
-        page: this.page,
-        pageSize: this.pageSize,
-        sort: this.sort,
-      };
       const res: BookmarkModel | undefined = await this.bookmarksService
-        .getAllBookmarks(queryParams)
+        .getAllBookmarks(this.defaultParams)
         .toPromise();
       this.bookmarks_list = res?.data || [];
       this.totalItems = res?.options.totalCount || this.totalItems;
@@ -85,7 +82,7 @@ export class BookmarksPageComponent implements OnInit {
   async addBookmark() {
     const dialogRef = this.dialog.open(AddEditBookmarkComponent, {
       width: '60%',
-      height: '60%',
+      height: '80%',
       panelClass: 'bookmark-dialog-box',
     });
 

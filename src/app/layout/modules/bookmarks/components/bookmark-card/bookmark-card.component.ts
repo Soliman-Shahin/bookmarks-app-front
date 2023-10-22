@@ -1,26 +1,30 @@
-import { BookmarksService } from './../../services/bookmarks.service';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { BookmarksService } from '../../services/bookmarks.service';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  inject,
+} from '@angular/core';
 import { AddEditBookmarkComponent } from '../add-edit-bookmark/add-edit-bookmark.component';
-import { MatDialog } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { TranslateService } from '@ngx-translate/core';
+import { BaseComponent } from 'src/app/shared/base';
 
 @Component({
   selector: 'app-bookmark-card',
   templateUrl: './bookmark-card.component.html',
   styleUrls: ['./bookmark-card.component.scss'],
 })
-export class BookmarkCardComponent implements OnInit {
+export class BookmarkCardComponent extends BaseComponent implements OnInit {
   @Input() bookmark: any = [];
   @Input() view: boolean = false;
   @Output() refreshBookmark = new EventEmitter();
 
-  constructor(
-    public dialog: MatDialog,
-    private _snackBar: MatSnackBar,
-    private bookmarksService: BookmarksService,
-    public translate: TranslateService
-  ) {}
+  bookmarksService = inject(BookmarksService);
+
+  constructor() {
+    super();
+  }
 
   ngOnInit() {}
 
@@ -50,7 +54,7 @@ export class BookmarkCardComponent implements OnInit {
         this.openSnackBar(
           'success',
           res?.ok,
-          this.translate.instant('BOOKMARK.removed')
+          this.translateService.instant('BOOKMARK.removed')
         );
         this.refreshBookmark.emit(true);
       },
@@ -58,9 +62,5 @@ export class BookmarkCardComponent implements OnInit {
         this.openSnackBar('error', err?.error.status, err?.error.message);
       }
     );
-  }
-
-  openSnackBar(type: any, status: any, message: any) {
-    this._snackBar.open(status, message, { panelClass: type });
   }
 }

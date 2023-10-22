@@ -11,6 +11,7 @@ import { AuthInterceptor } from './auth/services/authInterceptor';
 import { ErrorInterceptor } from './auth/services/errorInterceptor';
 import { MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
 import { SharedModule } from './shared/shared.module';
+import { LayoutModule } from './layout/layout.module';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -21,6 +22,7 @@ export function HttpLoaderFactory(http: HttpClient) {
   imports: [
     BrowserModule,
     SharedModule,
+    LayoutModule,
     AppRoutingModule,
     TranslateModule.forRoot({
       loader: {

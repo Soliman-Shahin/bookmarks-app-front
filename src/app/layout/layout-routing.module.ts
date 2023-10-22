@@ -1,8 +1,6 @@
 import { Routes, RouterModule } from '@angular/router';
-import { BookmarksPageComponent } from './pages/bookmarks-page/bookmarks-page.component';
 import { NgModule } from '@angular/core';
 import { LayoutComponent } from './layout.component';
-import { AboutComponent } from './pages/about/about.component';
 
 const routes: Routes = [
   {
@@ -11,11 +9,15 @@ const routes: Routes = [
     children: [
       {
         path: 'bookmarks',
-        component: BookmarksPageComponent,
+        loadChildren: () =>
+          import('./modules/bookmarks/bookmarks.module').then(
+            (m) => m.BookmarksModule
+          ),
       },
       {
         path: 'about',
-        component: AboutComponent,
+        loadChildren: () =>
+          import('./modules/about/about.module').then((m) => m.AboutModule),
       },
     ],
   },

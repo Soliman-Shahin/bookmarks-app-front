@@ -52,12 +52,12 @@
       *ngIf="bookmarks_list.length"
       (page)="handlePageEvent($event)"
       [length]="totalItems"
-      [pageSize]="pageSize"
+      [pageSize]="defaultParams.pageSize"
       [disabled]="disabled"
       [showFirstLastButtons]="showFirstLastButtons"
       [pageSizeOptions]="showPageSizeOptions ? pageSizeOptions : []"
       [hidePageSize]="hidePageSize"
-      [pageIndex]="page"
+      [pageIndex]="defaultParams.page"
       aria-label="Select page"
     >
     </mat-paginator>

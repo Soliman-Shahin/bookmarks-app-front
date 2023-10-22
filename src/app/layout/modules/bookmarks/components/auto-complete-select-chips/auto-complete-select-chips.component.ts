@@ -15,13 +15,17 @@ import { MatChipEditedEvent, MatChipInputEvent } from '@angular/material/chips';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
+import { BaseComponent } from 'src/app/shared/base';
 
 @Component({
   selector: 'app-auto-complete-select-chips',
   templateUrl: './auto-complete-select-chips.component.html',
   styleUrls: ['./auto-complete-select-chips.component.scss'],
 })
-export class AutoCompleteSelectChipsComponent implements OnInit {
+export class AutoCompleteSelectChipsComponent
+  extends BaseComponent
+  implements OnInit
+{
   @ViewChild('optionInput') optionInput!: ElementRef<HTMLInputElement>;
 
   @Input() label: string = '';
@@ -36,6 +40,7 @@ export class AutoCompleteSelectChipsComponent implements OnInit {
   announcer = inject(LiveAnnouncer);
 
   constructor() {
+    super();
     this.filteredOptions = this.optionCtrl.valueChanges.pipe(
       startWith(null),
       map((option: string | null) =>

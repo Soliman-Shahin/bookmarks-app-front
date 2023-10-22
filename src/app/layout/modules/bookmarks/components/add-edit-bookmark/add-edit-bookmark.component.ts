@@ -1,35 +1,17 @@
-import { TagsService } from './../../services/tags.service';
-import { LiveAnnouncer } from '@angular/cdk/a11y';
+import { TagsService } from '../../services/tags.service';
 import { BookmarksService } from '../../services/bookmarks.service';
-import {
-  Component,
-  ElementRef,
-  Inject,
-  OnInit,
-  ViewChild,
-  inject,
-} from '@angular/core';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { Component, Inject, OnInit, inject } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { TranslateService } from '@ngx-translate/core';
-import { COMMA, ENTER } from '@angular/cdk/keycodes';
-import { MatChipEditedEvent, MatChipInputEvent } from '@angular/material/chips';
 import { Tag, TagModel } from '../../models';
-import { Observable, map, startWith } from 'rxjs';
-import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
+import { BaseComponent } from 'src/app/shared/base';
 
 @Component({
   selector: 'app-add-edit-bookmark',
   templateUrl: './add-edit-bookmark.component.html',
   styleUrls: ['./add-edit-bookmark.component.scss'],
 })
-export class AddEditBookmarkComponent implements OnInit {
+export class AddEditBookmarkComponent extends BaseComponent implements OnInit {
   bookmarkForm!: FormGroup;
 
   addOnBlur = true;
@@ -47,11 +29,10 @@ export class AddEditBookmarkComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<AddEditBookmarkComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any,
-    private fb: FormBuilder,
-    private _snackBar: MatSnackBar,
-    public translate: TranslateService
-  ) {}
+    @Inject(MAT_DIALOG_DATA) public data: any
+  ) {
+    super();
+  }
 
   ngOnInit() {
     this.getUserTags();
@@ -123,7 +104,7 @@ export class AddEditBookmarkComponent implements OnInit {
       this.openSnackBar(
         'success',
         res?.ok,
-        this.translate.instant(
+        this.translateService.instant(
           'BOOKMARK.' + (this.data?._id ? 'updated' : 'added')
         )
       );
@@ -132,9 +113,5 @@ export class AddEditBookmarkComponent implements OnInit {
     } catch (err: any) {
       this.openSnackBar('error', err?.error.status, err?.error.message);
     }
-  }
-
-  openSnackBar(type: any, status: any, message: any) {
-    this._snackBar.open(status, message, { panelClass: type });
   }
 }
